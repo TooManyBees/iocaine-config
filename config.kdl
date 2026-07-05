@@ -1,0 +1,34 @@
+state-directory "/var/lib/iocaine"
+
+prometheus-server default:metrics {
+	bind "127.0.0.1:42042"
+	persist-path "/srv/iocaine/tmp/metrics.json"
+	persist-interval "10min"
+}
+
+declare-handler default language=lua path="/srv/iocaine/handler" {
+	logging
+	minify #false
+
+	poison-id "perfidious"
+
+	sources {
+		training-corpus "/srv/iocaine/data/susan.sontag.notes.on.camp.txt"
+		//wordlists ""
+	}
+
+	ai-robots-txt-path "/srv/iocaine/robots.json"
+
+	unwanted-asns {
+		db-path "/srv/iocaine/GeoLite2-ASN_20260703/GeoLite2-ASN.mmdb"
+	}
+
+	// toomanybees.com
+	trusted-ips "165.227.197.245/32" "2604:a880:400:d1:0:1:7434:3001/128"
+
+}
+
+http-server default {
+	bind "/srv/iocaine/tmp/iocaine.sock" unix-socket-access="everybody"
+	use handler-from=default metrics=default:metrics	
+}

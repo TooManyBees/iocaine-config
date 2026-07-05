@@ -1,0 +1,5 @@
+*.swp
+*.sock
+tmp/metrics.json
+data/*.txt
+GeoLite*
