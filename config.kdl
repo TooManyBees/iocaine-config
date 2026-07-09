@@ -13,8 +13,11 @@ declare-handler default language=lua path="/srv/iocaine/handler" {
 	poison-id "perfidious"
 
 	sources {
-		training-corpus "/srv/iocaine/data/susan.sontag.notes.on.camp.txt"
-		//wordlists ""
+		training-corpus \
+			"/srv/iocaine/data/susan.sontag.notes.on.camp.txt" \
+			"/srv/iocaine/data/susan.sontag.against.interpretation.txt" \
+			"/srv/iocaine/data/susan.sontag.on.style.txt"
+		wordlists "/srv/iocaine/data/wordlist.txt"
 	}
 
 	ai-robots-txt-path "/srv/iocaine/robots.json"
@@ -26,6 +29,7 @@ declare-handler default language=lua path="/srv/iocaine/handler" {
 	// toomanybees.com
 	trusted-ips "165.227.197.245/32" "2604:a880:400:d1:0:1:7434:3001/128"
 
+	trusted-paths "/robots.txt" "/.well-known/" "/avatar/builder"
 }
 
 http-server default {
