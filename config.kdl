@@ -2,7 +2,7 @@ state-directory "/var/lib/iocaine"
 
 prometheus-server default:metrics {
 	bind "127.0.0.1:42042"
-	persist-path "/srv/iocaine/tmp/metrics.json"
+	persist-path "/var/lib/iocaine/metrics.json"
 	persist-interval "10min"
 }
 
@@ -29,6 +29,6 @@ declare-handler default language=lua path="/srv/iocaine/handler" {
 }
 
 http-server default {
-	bind "/srv/iocaine/tmp/iocaine.sock" unix-socket-access="everybody"
+	bind "/var/run/iocaine/iocaine.sock" unix-socket-access="everybody"
 	use handler-from=default metrics=default:metrics	
 }
