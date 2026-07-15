@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta name=viewport content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <main>
+            <h1>{{ title }}</h1>
+            {% for p in garbage.paragraphs %}
+                <p>{{ p }}</p>
+            {% endfor %}
+
+            <nav>
+                <strong>See also:</strong>
+                <ul>
+                    {% for item in garbage.links %}
+                        <li><a href="/{{ poison_id }}{{ item.path }}">{{ item.text }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </main>
+        <footer>
+            <hr>
+            <p>Copyright © {{ random_year }} {{ random_author }}</p>
+        </footer>
+    </body>
+</html>
+

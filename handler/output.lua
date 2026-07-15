@@ -76,12 +76,12 @@ function generate_garbage(request)
 	end
 
 	local poison_id
-	if POISON_ID_PATTERNS:matches(request.path) then
-		poison_id = ""
-	else
+	-- if POISON_ID_PATTERNS:matches(request.path) then
+	-- 	poison_id = ""
+	-- else
 		local idx = rng:in_range(1, POISON_IDS_LEN)
-		poison_id = urlencode(POISON_IDS[idx])
-	end
+		poison_id = urlencode(POISON_IDS[idx]) .. cfg.garbage.links["uri-separator"]
+	-- end
 
 	return {
 		title = MARKOV:generate(
@@ -91,7 +91,7 @@ function generate_garbage(request)
 				cfg.garbage.title["max-words"]
 			)
 		),
-		random_year = rng:in_range(895, 4269),
+		random_year = rng:in_range(1963, 2016),
 		random_author = html_escape(MARKOV:generate(rng, rng:in_range(1, 4))),
 		request = {
 			host = request:header("host"),

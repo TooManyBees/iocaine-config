@@ -10,6 +10,7 @@ declare-handler default language=lua path="/srv/iocaine/handler" {
 	logging
 	minify #false
 
+	template-file "/srv/iocaine/handler/template.html"
 	poison-id "perfidious"
 
 	sources {
